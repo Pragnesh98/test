@@ -1,0 +1,2 @@
+docker build -t fluentd .
+docker run -it -v /var/log/yellowmessenger/asterisk_ari/asterisk_ari.log:/var/log/yellowmessenger/asterisk_ari/asterisk_ari.log fluentd

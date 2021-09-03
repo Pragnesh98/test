@@ -1,0 +1,25 @@
+[Unit]
+Description=asterisk-ari
+After=syslog.target network.target
+
+[Service]
+Environment="GOOGLE_APPLICATION_CREDENTIALS=/home/asterisk/.google/credentials.json"
+Environment="AZURE_STORAGE_ACCOUNT=yellowmessenger"
+Environment="AZURE_STORAGE_ACCESS_KEY=/qnaZM6BMIwCaeRvhbhbrfzb6t3npUBZDxVMSDgdnJSozd7O3zdurau+yNUXf/FO7XdP1zhQQCnX9/jeyIg2ew=="
+Environment="NEW_RELIC_LICENSE_KEY=34ff2b9dd449161b5e0a5bbc161c06877355NRAL"
+LimitNOFILE=1000000
+ExecStart=/home/asterisk/asterisk-ari/asterisk-ari
+TimeoutSec=10s
+RestartSec=5
+Restart=always
+KillSignal=TERM
+User=root
+Group=root
+StandardOutput=file:/home/asterisk/asterisk-ari/logs/access.log
+StandardError=file:/home/asterisk/asterisk-ari/logs/access.log
+#StandardError=syslog
+SyslogIdentifier=asterisk-ari
+WorkingDirectory=/home/asterisk/asterisk-ari/
+
+[Install]
+WantedBy=multi-user.target

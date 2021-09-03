@@ -1,0 +1,4 @@
+
+
+vosk==0.3.15
+websockets==8.1

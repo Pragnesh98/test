@@ -1,0 +1,60 @@
+[general]
+
+; Set default context
+; ^^^^^^^^^^^^^^^^^^^
+;
+; OPTIONS request are periodically sent by SBC for health checking
+; purposes. We should return a 200 OK instead of 404 Not Found. The
+; 404 happened because context 'default' was being search in
+; extensions.conf since the configuration 'context' wasn't set in
+; [general] section.
+rtcachefriends=yes
+
+allowguest=no
+context=incoming
+subscribecontext=incoming
+register=>68402300@10.0.76.13:1234@10.0.76.13/08068402300
+host=10.0.76.13
+
+;Tata Tele SIP
+[10.0.76.13]
+type=friend
+host=10.0.76.13
+defaultuser=68402300
+secret=1234
+allow=alaw
+allow=ulaw
+dtmfmode=rfc2833
+nat=no
+bindport=5080
+insecure=invite,port
+canreinvite=yes
+context=sip-incoming
+sendrpid=yes
+trustrpid=yes
+relaxdtmf=yes
+qualify=yes
+fromdomain=>10.0.76.13
+autodomain=>yes
+
+;Kashish
+[09413745250]
+type=friend
+context=incoming
+host=dynamic
+careinvite=no
+nat=yes
+port=5069
+secret=12321
+canreinvite=no
+
+;Kashish-alternate
+[09413745251]
+type=friend
+context=incoming
+host=dynamic
+careinvite=no
+nat=yes
+port=5069
+secret=12322
+canreinvite=no

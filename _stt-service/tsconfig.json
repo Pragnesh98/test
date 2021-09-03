@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "sourceMap": true
+  },
+  "include": ["./src/**/*", "src/utils/recognizeStream.ts", "src/utils/recognizeOnce.ts", "src/utils/azureutil.ts"],
+  "exclude": ["node_modules"]
+}
