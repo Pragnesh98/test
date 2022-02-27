@@ -1,0 +1,5 @@
+{"error":"listen tcp: address config.HttpConfig.HostPort: missing port in address","level":"fatal","msg":"Unable to start the callCenter service without tls","time":"2021-10-16T11:40:54+05:30"}
+{"error":"listen tcp: address config.HttpConfig.HostPort: missing port in address","level":"fatal","msg":"Unable to start the callCenter service without tls","time":"2021-10-16T11:41:16+05:30"}
+{"error":"listen tcp: address config.HttpConfig.HostPort: missing port in address","level":"fatal","msg":"Unable to start the callCenter service without tls","time":"2021-10-16T11:43:44+05:30"}
+{"error":"listen tcp: address config.HttpConfig.HostPort: missing port in address","level":"fatal","msg":"Unable to start the callCenter service without tls","time":"2021-10-16T11:44:22+05:30"}
+{"error":"listen tcp: address config.HttpConfig.HostPort: missing port in address","level":"fatal","msg":"Unable to start the callCenter service without tls","time":"2021-10-16T11:44:31+05:30"}
