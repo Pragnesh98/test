@@ -1,0 +1,149 @@
+               <configuration name="conference.conf" description="Audio Conference">
+                        <caller-controls>
+                                <group name="default">
+                                        <control digits="ivr-dtmf-timeout" action="1000" data=""/>
+                                        <control digits="*6" action="execute_application" data="lua mute.lua ${conference_name} ${uuid}"/>
+                                        <control digits="#6" action="execute_application" data="lua unmute.lua ${conference_name} ${uuid}"/>
+                                </group>
+                                <group name="moderator">
+                                        <control digits="" action="mute" data=""/>
+                                        <control digits="*" action="deaf mute" data=""/>
+                                        <control digits="9" action="energy up" data=""/>
+                                        <control digits="8" action="energy equ" data=""/>
+                                        <control digits="7" action="energy dn" data=""/>
+                                        <control digits="3" action="vol talk up" data=""/>
+                                        <control digits="2" action="vol talk zero" data=""/>
+                                        <control digits="1" action="vol talk dn" data=""/>
+                                        <control digits="6" action="vol listen up" data=""/>
+                                        <control digits="5" action="vol listen zero" data=""/>
+                                        <control digits="4" action="vol listen dn" data=""/>
+                                        <control digits="" action="hangup" data=""/>
+                                                                                <control digits="#" action="execute_application" data="lua /usr/local/freeswitch/scripts/unmute.lua"/>
+                                        <control digits="6" action="execute_application" data="lua /usr/local/freeswitch/scripts/unmute.lua"/>
+                                        <control digits="*" action="execute_application" data="lua /usr/local/freeswitch/scripts/read.lua non_moderator"/>
+                                </group>
+
+                                <group name="chairperson">
+                                        <control digits="ivr-dtmf-timeout" action="5000" data=""/>
+                                        <control digits="*0" action="execute_application" data="lua keypad_commands.lua ${conference_name} ${uuid}"/>
+					<control digits="*0*0" action="execute_application" data="lua operator_request.lua ${conference_name} ${uuid} conference"/>
+					<control digits="*0*1" action="execute_application" data="lua dialout.lua ${conference_name} ${uuid}"/>
+					<control digits="*0*2" action="execute_application" data="lua participants_name.lua ${conference_name} ${uuid}"/>
+					<control digits="*0*3" action="execute_application" data="lua lock_unlock.lua ${conference_name} ${uuid}"/>
+					<control digits="*0*4" action="execute_application" data="lua conf_call.lua ${conference_name} ${uuid} TOGGLE"/>
+					<control digits="*0*5" action="execute_application" data="lua Enable_Disable_participant_name.lua ${conference_name} ${uuid}"/>
+				 	<control digits="*0*9" action="execute_application" data="lua rejoin.lua ${conference_name} ${uuid}"/>
+					<control digits="*0*6*2" action="execute_application" data="lua rejoin.lua ${conference_name} ${uuid}"/>
+					<control digits="*0*6*6" action="execute_application" data="lua participants_counts.lua ${conference_name} ${uuid}"/>
+					<control digits="*2" action="execute_application" data="lua record_call.lua ${conference_name} ${uuid}"/>
+					<control digits="26868#" action="execute_application" data="lua party_counts.lua ${conference_name} ${uuid}"/>
+					<control digits="72#" action="execute_application" data="lua roll_call.lua ${conference_name} ${uuid}"/>
+					<control digits="*6" action="execute_application" data="lua mute_unmute.lua ${conference_name} ${uuid} mute-self"/>
+					<control digits="*7" action="execute_application" data="lua lock_unlock.lua ${conference_name} ${uuid}"/>
+					<control digits="61#" action="execute_application" data="lua group_mute_unmute.lua ${conference_name} ${uuid} mute-all"/>	
+					<control digits="62#" action="execute_application" data="lua group_mute_unmute.lua ${conference_name} ${uuid} unmute-all"/>
+					<control digits="*9" action="execute_application" data="lua disconnect_all_line.lua ${conference_name} ${uuid}"/>
+				</group>
+
+				<group name="guest">
+                                        <control digits="ivr-dtmf-timeout" action="5000" data=""/>
+                                        <control digits="*0" action="execute_application" data="lua operator_request.lua ${conference_name} ${uuid} conference"/>
+                                        <control digits="*6" action="execute_application" data="lua mute_unmute.lua ${conference_name} ${uuid} mute-self"/>
+                                        <control digits="*7" action="execute_application" data="lua lock_unlock.lua ${conference_name} ${uuid}"/>
+                                </group>
+
+                                <group name="Mindbridge-default">
+                                        <control digits="" action="mute" data=""/>
+                                        <control digits="" action="deaf mute" data=""/>
+                                        <control digits="9" action="energy up" data=""/>
+                                        <control digits="8" action="energy equ" data=""/>
+                                        <control digits="7" action="energy dn" data=""/>
+                                        <control digits="3" action="vol talk up" data=""/>
+                                        <control digits="2" action="vol talk zero" data=""/>
+                                        <control digits="1" action="vol talk dn" data=""/>
+<!--                                    <control digits="6" action="vol listen up" data=""/> -->
+                                        <control digits="5" action="vol listen zero" data=""/>
+                                        <control digits="4" action="vol listen dn" data=""/>
+                                        <control digits="" action="hangup" data=""/>
+                                        <control digits="#" action="execute_application" data="lua /usr/local/freeswitch/scripts/unmute.lua"/>
+                                        <control digits="6" action="execute_application" data="lua /usr/local/freeswitch/scripts/unmute.lua"/>
+<!--                                    <control digits="*" action="execute_application" data="lua /usr/share/freeswitch/scripts/read.lua non_moderator"/> -->
+				</group>
+
+				<!-- Solution Type Mindbridge Conference Profile -->
+                                <group name="Mindbridge">
+                                        <control digits="" action="mute" data=""/>
+                                        <control digits="*" action="deaf mute" data=""/>
+                                        <control digits="9" action="energy up" data=""/>
+                                        <control digits="8" action="energy equ" data=""/>
+                                        <control digits="7" action="energy dn" data=""/>
+                                        <control digits="3" action="vol talk up" data=""/>
+                                        <control digits="2" action="vol talk zero" data=""/>
+                                        <control digits="1" action="vol talk dn" data=""/>
+                                        <control digits="6" action="vol listen up" data=""/>
+                                        <control digits="5" action="vol listen zero" data=""/>
+                                        <control digits="4" action="vol listen dn" data=""/>
+                                        <control digits="" action="hangup" data=""/>
+                                        <control digits="#" action="execute_application" data="lua /usr/local/freeswitch/scripts/unmute.lua"/>
+                                        <control digits="6" action="execute_application" data="lua /usr/local/freeswitch/scripts/unmute.lua"/>
+                                        <control digits="*" action="execute_application" data="lua /usr/local/freeswitch/scripts/read.lua non_moderator"/>
+                                </group>
+			</caller-controls>
+			<profiles>
+                                <profile name="default">
+                                        <param name="cdr-log-dir" value="auto"/>
+                                        <param name="domain" value=""/>
+                                        <param name="rate" value="8000"/>
+                                        <param name="interval" value="20"/>
+                                        <param name="energy-level" value="15"/>
+                                        <param name="auto-gain-level" value="0"/>
+                                        <param name="caller-controls" value="default"/>
+                                        <param name="moderator-controls" value="moderator"/>
+                                        <param name="muted-sound" value="/usr/local/freeswitch/prompt/you_are_muted.mp3"/>
+                                        <param name="unmuted-sound" value="/usr/local/freeswitch/prompt/you_are_unmuted.mp3"/>
+                                        <param name="alone-sound" value="/usr/local/freeswitch/prompt/45.mp3"/>
+                                        <param name="moh-sound" value="/usr/local/freeswitch/prompt/hold_music.wav"/>
+                                        <param name="enter-sound" value="tone_stream://%(200,0,500,600,700)"/>
+                                        <param name="exit-sound" value="/usr/local/freeswitch/prompt/78.mp3"/>
+                                        <param name="kicked-sound" value="conference/conf-kicked.wav"/>
+                                        <param name="locked-sound" value="/usr/local/freeswitch/prompt/60.mp3"/>
+                                        <param name="max-members-sound" value="/usr/local/freeswitch/prompt/52.mp3"/>
+                                        <param name="max-members" value="20"/>
+                                        <param name="is-locked-sound" value="/usr/local/freeswitch/prompt/conf_locked_by_leader.mp3"/>
+                                        <param name="is-unlocked-sound" value="/usr/local/freeswitch/prompt/conf_unlocked.mp3"/>
+                                        <param name="pin-sound" value="conference/conf-pin.wav"/>
+                                        <param name="bad-pin-sound" value="conference/conf-bad-pin.wav"/>
+                                        <param name="caller-id-name" value=""/>
+                                        <param name="caller-id-number" value=""/>
+                                        <param name="comfort-noise" value="true"/>
+				</profile>
+				<profile name="Mindbridge">
+                                        <param name="cdr-log-dir" value="auto"/>
+                                        <param name="conference-flags" value="wait-mod|audio-always"/>
+                                        <param name="domain" value=""/>
+                                        <param name="rate" value="8000"/>
+                                        <param name="interval" value="20"/>
+                                        <param name="energy-level" value="15"/>
+                                        <param name="auto-gain-level" value="0"/>
+                                        <param name="caller-controls" value="default"/>
+                                        <param name="moderator-controls" value="chairperson"/>
+                                        <param name="muted-sound" value="/usr/local/freeswitch/prompt/you_are_muted.mp3"/>
+                                        <param name="unmuted-sound" value="/usr/local/freeswitch/prompt/you_are_unmuted.mp3"/>
+                                        <param name="alone-sound" value="/usr/local/freeswitch/prompt/45.mp3"/>
+                                        <param name="moh-sound" value="/usr/local/freeswitch/prompt/hold_music.wav"/>
+                                        <param name="enter-sound" value="tone_stream://%(200,0,500,600,700)"/>
+                                        <param name="exit-sound" value="/usr/local/freeswitch/prompt/78.mp3"/>
+                                        <param name="kicked-sound" value="conference/conf-kicked.wav"/>
+                                        <param name="locked-sound" value="/usr/local/freeswitch/prompt/60.mp3"/>
+                                        <param name="max-members-sound" value="/usr/local/freeswitch/prompt/52.mp3"/>
+                                        <param name="max-members" value="20"/>
+                                        <param name="is-locked-sound" value="/usr/local/freeswitch/prompt/conf_locked_by_leader.mp3"/>
+                                        <param name="is-unlocked-sound" value="/usr/local/freeswitch/prompt/conf_unlocked.mp3"/>
+                                        <param name="pin-sound" value="conference/conf-pin.wav"/>
+                                        <param name="bad-pin-sound" value="conference/conf-bad-pin.wav"/>
+                                        <param name="caller-id-name" value=""/>
+                                        <param name="caller-id-number" value=""/>
+                                        <param name="comfort-noise" value="true"/>
+                                </profile>
+			  </profiles>
+                </configuration>

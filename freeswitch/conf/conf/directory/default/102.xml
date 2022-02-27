@@ -1,0 +1,13 @@
+<include>
+  <user id="102">
+    <params>
+      <param name="vm-password" value="1002"/>
+    </params>
+    <variables>
+      <variable name="accountcode" value="102"/>
+      <variable name="user_context" value="default"/>
+      <variable name="effective_caller_id_name" value="Extension 102"/>
+      <variable name="effective_caller_id_number" value="102"/>
+    </variables>
+  </user>
+</include>

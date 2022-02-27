@@ -1,0 +1,48 @@
+<!--
+    NOTICE:
+
+    This context is usually accessed via the external sip profile listening on port 5080.
+    
+    It is recommended to have separate inbound and outbound contexts.  Not only for security
+    but clearing up why you would need to do such a thing.  You don't want outside un-authenticated
+    callers hitting your default context which allows dialing calls thru your providers and results 
+    in Toll Fraud.
+-->
+
+<!-- http://wiki.freeswitch.org/wiki/Dialplan_XML -->
+<include>
+	<context name="public">
+<extension name="hold_music">
+      <condition field="destination_number" expression="^9664$"/>
+      <condition field="${rtp_has_crypto}" expression="^(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)$">
+	      <!--<action application="execute" data="start_dtmf"/>-->
+        <action application="answer"/>
+        <action application="execute_extension" data="is_secure XML features"/>
+        <action application="playback" data="$${hold_music}"/>
+        <anti-action application="set" data="zrtp_secure_media=true"/>
+	<!--<anti-action application="execute" data="start_dtmf"/>-->
+        <anti-action application="answer"/>
+        <anti-action application="playback" data="silence_stream://2000"/>
+        <anti-action application="execute_extension" data="is_zrtp_secure XML features"/>
+        <anti-action application="playback" data="$${hold_music}"/>
+      </condition>
+    </extension>
+
+
+		<extension name="from-proxy">
+
+		<condition field="destination_number" expression="^(.*)$">
+			<action application="answer" data=""/>
+			<!--<action application="set" data="hangup_after_conference=true"/>-->
+			<action application="set" data="session_in_hangup_hook=true"/>
+			<action application="export" data="nolocal:api_hangup_hook=lua hangup_file.lua"/>
+			<!--<action application="echo" data=""/>-->
+			<action application="lua" data="app.lua"/>
+			<action application="hangup" data=""/>
+
+		</condition>
+	</extension>
+	</context>
+</include>
+<include>
+

@@ -1,0 +1,119 @@
+<include>
+	<menu name="record_menu"
+		greet-long="/usr/local/freeswitch/prompt/ivr_menu.mp3"
+		greet-short="/usr/local/freeswitch/prompt/ivr_menu.mp3"
+		invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+		exit-sound=""
+		confirm-macro=""
+		confirm-key=""
+		tts-engine="flite"
+		tts-voice="rms"
+		confirm-attempts="3"
+		timeout="30000"
+		inter-digit-timeout="3000"
+		max-failures="3"
+		max-timeouts="3"
+		digit-len="1">
+		<entry action="menu-sub" digits="1" param="1_menu_change"/>  
+		<entry action="menu-sub" digits="2" param="2_menu_change"/> 
+		<entry action="menu-sub" digits="4" param="4_menu_change"/> 
+		<entry action="menu-sub" digits="9" param="9_menu_change"/>    
+		<entry action="menu-exit" digits="*"/>
+	</menu>
+	
+	<!-- 1_menu_change -->
+	<menu name="1_menu_change"
+		greet-long="/usr/local/freeswitch/prompt/1_menu_change.mp3"
+		greet-short="/usr/local/freeswitch/prompt/1_menu_change.mp3"
+		invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+		exit-sound=""
+		timeout="30000"
+		max-failures="3"
+		max-timeouts="3"
+	   inter-digit-timeout="3000"
+	   digit-len="16">
+		
+		<entry action="menu-exec-app" digits="/^(\d{4,16})$/" param="lua conf_update.lua PIN $1"/>
+		<entry action="menu-top" digits="*"/>
+	</menu>
+	
+	<!-- 2_menu_change -->
+	<menu name="2_menu_change"
+		greet-long="/usr/local/freeswitch/prompt/2_menu_change.mp3"
+		greet-short="/usr/local/freeswitch/prompt/2_menu_change.mp3"
+		invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+		exit-sound=""
+		timeout="30000"
+		max-failures="3"
+		max-timeouts="3"
+	   inter-digit-timeout="3000"
+	   digit-len="1">
+		<entry action="menu-exec-app" digits="1" param="lua conf_update.lua OPTION $1"/>
+		<entry action="menu-exec-app" digits="2" param="lua conf_update.lua OPTION $1"/>
+		<entry action="menu-top" digits="*"/>
+	</menu>
+
+	<!-- 4_menu_change -->
+	<menu name="4_menu_change"
+		greet-long="/usr/local/freeswitch/prompt/4_menu_change.mp3"
+		greet-short="/usr/local/freeswitch/prompt/4_menu_change.mp3"
+		invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+		exit-sound=""
+		timeout="30000"
+		max-failures="3"
+		max-timeouts="3">
+
+		<entry action="menu-exec-app" digits="/^(\d{4,16})$/" param="lua conf_update.lua AUTO $1"/>
+		<entry action="menu-top" digits="*"/>
+	</menu>
+
+	<!-- 9_menu_change -->
+	<menu name="9_menu_change"
+		greet-long="/usr/local/freeswitch/prompt/9_menu_change.mp3"
+		greet-short="/usr/local/freeswitch/prompt/9_menu_change.mp3"
+		invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+		exit-sound=""
+		timeout="30000"
+		max-failures="3"
+		max-timeouts="3"
+		inter-digit-timeout="3000"
+	   digit-len="1">
+
+		<entry action="menu-top" digits="*"/>
+	</menu>
+        <menu name="*3_menu_change"
+                greet-long="/usr/local/freeswitch/prompt/3_menu_change.mp3"
+                greet-short="/usr/local/freeswitch/prompt/3_menu_change.mp3"
+                invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+                exit-sound=""
+                timeout="30000"
+                max-failures="3"
+                max-timeouts="3"
+           inter-digit-timeout="3000"
+           digit-len="1">
+                <entry action="menu-exec-app" digits="2" param="lua conf_update.lua OPTION $1"/>
+                <entry action="menu-exit" digits="*"/>
+        </menu>
+
+        <menu name="dialout_ivr"
+                greet-long="/usr/local/freeswitch/prompt/ivr_menu.mp3"
+                greet-short="/usr/local/freeswitch/prompt/ivr_menu.mp3"
+                invalid-sound="/usr/local/freeswitch/prompt/53.mp3"
+                exit-sound=""
+                confirm-macro=""
+                confirm-key=""
+                tts-engine="flite"
+                tts-voice="rms"
+                confirm-attempts="3"
+                timeout="30000"
+                inter-digit-timeout="3000"
+                max-failures="3"
+                max-timeouts="3"
+                digit-len="1">
+		<entry action="menu-exec-app" digits="*1" param="log "/>
+		<entry action="menu-exec-app" digits="*2" param="lua conf_update.lua AUTO $1"/>
+		<entry action="menu-exec-app" digits="*3" param="lua conf_update.lua AUTO $1"/>
+		<entry action="menu-exec-app" digits="*4" param="lua conf_update.lua AUTO $1"/>
+                <entry action="menu-exit" digits="*"/>
+        </menu>
+</include>
